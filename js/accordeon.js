@@ -8,9 +8,9 @@ contens.forEach((elem) => {
     title.addEventListener('click', () => {
         descrAll.forEach((d) => {
             if (d !== descr)
-                d.classList.remove('active')
-        })
+                d.classList.remove('active');
+        });
 
         descr.classList.toggle('active');
-    })
-})
+    });
+});
