@@ -1,7 +1,8 @@
-const modalBtns = document.querySelectorAll('.modal__button');
-const modalWindow = document.querySelector('.modal');
-const body = document.querySelector('body');
-const svgCross = `
+const modal = () => {
+    const modalBtns = document.querySelectorAll('.modal__button');
+    const modalWindow = document.querySelector('.modal');
+    const body = document.querySelector('body');
+    const svgCross = `
   <svg version="1.1" id="Capa_1" fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="612.043px" height="612.043px" viewBox="0 0 612.043 612.043" style="enable-background:new 0 0 612.043 612.043;"
 	 xml:space="preserve">
@@ -18,39 +19,42 @@ const svgCross = `
 </svg>
 `;
 
-let modalInner = modalWindow.querySelector('.modal__inner');
-modalInner.style.position = 'relative';
+    let modalInner = modalWindow.querySelector('.modal__inner');
+    modalInner.style.position = 'relative';
 
-let closeButton = document.createElement('div');
-closeButton.className = 'modal__close';
-closeButton.innerHTML = svgCross;
-closeButton.style.position = 'absolute';
-closeButton.style.display = 'flex';
-closeButton.style.alignItems = 'center';
-closeButton.style.top = '1rem';
-closeButton.style.right = '1rem';
-closeButton.style.width = '3rem';
-closeButton.style.height = '3rem';
-closeButton.style.cursor = 'pointer';
+    let closeButton = document.createElement('div');
+    closeButton.className = 'modal__close';
+    closeButton.innerHTML = svgCross;
+    closeButton.style.position = 'absolute';
+    closeButton.style.display = 'flex';
+    closeButton.style.alignItems = 'center';
+    closeButton.style.top = '1rem';
+    closeButton.style.right = '1rem';
+    closeButton.style.width = '3rem';
+    closeButton.style.height = '3rem';
+    closeButton.style.cursor = 'pointer';
 
-modalInner.appendChild(closeButton);
+    modalInner.appendChild(closeButton);
 
-modalBtns.forEach((btn) => {
-    btn.addEventListener('click', () => {
-        modalWindow.style.display = 'flex'; //modalWindow.classList.add('active');
-        body.classList.add('noscroll');
+    modalBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+            modalWindow.style.display = 'flex'; //modalWindow.classList.add('active');
+            body.classList.add('noscroll');
+        });
     });
-});
 
-modalWindow.addEventListener('click', e => {
-    const isModal = e.target.closest('.modal__inner');
-    if (!isModal) {
-        modalWindow.style.display = 'none'; //modalWindow.classList.remove('active');
+    modalWindow.addEventListener('click', e => {
+        const isModal = e.target.closest('.modal__inner');
+        if (!isModal) {
+            modalWindow.style.display = 'none'; //modalWindow.classList.remove('active');
+            body.classList.remove('noscroll');
+        }
+    });
+
+    closeButton.addEventListener('click', e => {
+        modalWindow.style.display = 'none';
         body.classList.remove('noscroll');
-    }
-});
+    });
+};
 
-closeButton.addEventListener('click', e => {
-    modalWindow.style.display = 'none';
-    body.classList.remove('noscroll');
-})
+modal();
